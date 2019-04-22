@@ -11,7 +11,7 @@ TerminalUI::TerminalUI() {
 
 void TerminalUI::run() {
 
-    printf("Enter a message to hash. Enter \\q to quit.\n");
+    printf("Enter a message to hash. Enter \\q to quit.\n\n");
 
     std::string input;
     std::string hashed;

@@ -10,7 +10,7 @@
 
 HashClient::HashClient() {
 
-    mServerIp = "127.0.0.1";
+    mServerIp = "0.0.0.0";
     mServerPort = 8080;
     mBufferSize = 256;
 }
