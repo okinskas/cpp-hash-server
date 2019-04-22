@@ -1,12 +1,13 @@
 #ifndef CPP_HASH_SERVER_HASHSERVER_H
 #define CPP_HASH_SERVER_HASHSERVER_H
 
-#include "Socket.h"
 
 #include <string>
 #include <memory>
 #include <thread>
 #include <vector>
+
+#include "Socket.h"
 
 class HashServer {
     const int mConcurrentConnections;

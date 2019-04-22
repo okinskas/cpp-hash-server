@@ -1,11 +1,11 @@
-#include "Socket.h"
-
 #include <netdb.h>
 #include <netinet/in.h>
 #include <stdexcept>
 #include <strings.h>
 #include <cstring>
 #include <unistd.h>
+
+#include "Socket.h"
 
 Socket::Socket(int port) {
 

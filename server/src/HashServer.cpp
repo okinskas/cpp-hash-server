@@ -1,9 +1,3 @@
-#include "HashServer.h"
-#include "Socket.h"
-#include "SocketReader.h"
-#include "server/gateway/Hasher.h"
-#include "external/SHA_Hasher.h"
-
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/socket.h>
@@ -15,6 +9,11 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+
+#include "HashServer.h"
+#include "Socket.h"
+#include "SocketReader.h"
+#include "external/SHA_Hasher.h"
 
 void HashServer::handleSocketConnection(int connection) {
 

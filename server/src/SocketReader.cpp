@@ -3,8 +3,8 @@
 #include <regex>
 #include <iostream>
 #include <sys/socket.h>
-#include "SocketReader.h"
 
+#include "SocketReader.h"
 
 SocketReader::SocketReader() = default;
 
