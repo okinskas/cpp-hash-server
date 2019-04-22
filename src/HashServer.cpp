@@ -1,7 +1,7 @@
 #include "HashServer.h"
 #include "Socket.h"
 #include "SocketReader.h"
-#include "gateway/Hasher.h"
+#include "server/gateway/Hasher.h"
 #include "external/SHA_Hasher.h"
 
 #include <unistd.h>
