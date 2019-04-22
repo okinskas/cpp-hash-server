@@ -9,10 +9,12 @@
 #include <vector>
 
 class HashServer {
+    const int mConcurrentConnections;
     std::vector<std::thread> connections;
     std::unique_ptr<Socket> mSocket;
 public:
     HashServer();
+    HashServer(int port, int concurrentConnections);
     ~HashServer();
     void run();
 

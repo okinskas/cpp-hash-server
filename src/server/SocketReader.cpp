@@ -26,6 +26,7 @@ std::string SocketReader::readFromSocket(int connection) {
 }
 
 std::string SocketReader::getMessageFromBuffer(char *buffer){
+
     std::string full(buffer);
     return full.substr(0, full.find("\\0"));
 }

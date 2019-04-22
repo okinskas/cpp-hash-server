@@ -1,11 +1,9 @@
 #include "HashServer.h"
 
-#include <iostream>
 #include <memory>
 
 int main() {
 
-    auto server = std::make_unique<HashServer>();
+    auto server = std::make_unique<HashServer>(8080, 3);
     server->run();
-    return 0;
 }

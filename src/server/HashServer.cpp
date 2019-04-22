@@ -16,32 +16,35 @@
 #include <iostream>
 #include <algorithm>
 
-#define PORT 8080
-
 void HashServer::handleSocketConnection(int connection) {
+
     auto socketReader = std::make_unique<SocketReader>();
     std::string msg = socketReader->readFromSocket(connection);
-    auto hasher = std::make_unique<SHA_Hasher>(10000);
+    auto hasher = std::make_unique<SHA_Hasher>();
     std::string hashed = hasher->hashN(msg);
     write(connection, hashed.c_str(), hashed.length());
 }
 
-HashServer::HashServer() {
-    mSocket = std::make_unique<Socket>(PORT);
+HashServer::HashServer(int port, const int concurrentConnections) : mConcurrentConnections(concurrentConnections) {
+
+    mSocket = std::make_unique<Socket>(port);
 }
 
 HashServer::~HashServer() {
+
     connections.clear();
 }
 
 void HashServer::run() {
+
     initialiseConnections();
     monitorConnections();
 }
 
 void HashServer::initialiseConnections() {
+
     int connection;
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < mConcurrentConnections; i++) {
         connection = mSocket->wait();
         std::thread th(handleSocketConnection, connection);
         connections.push_back(std::move(th));
