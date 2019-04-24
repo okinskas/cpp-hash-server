@@ -2,7 +2,6 @@
 #define CPP_HASH_SERVER_SHA_HASHER_H
 
 #include <string>
-#include "../server/gateway/Hasher.h"
 
 class SHA_Hasher {
     int rounds;
