@@ -20,16 +20,16 @@ SHA_Hasher::SHA_Hasher(int rounds) {
 
 SHA_Hasher::~SHA_Hasher() = default;
 
-std::string SHA_Hasher::hashN(std::string in) {
+std::string SHA_Hasher::hashN(const std::string &in) {
 
-    std::string out = std::move(in);
+    std::string out = in;
     for (int i = 0; i < rounds; i++) {
         out = hash(out);
     }
     return out;
 }
 
-std::string SHA_Hasher::hash(const std::string& str) {
+std::string SHA_Hasher::hash(const std::string &str) {
 
     // Implementation found here: https://stackoverflow.com/questions/2262386/generate-sha256-with-openssl-and-c
     unsigned char hash[SHA256_DIGEST_LENGTH];

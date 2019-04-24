@@ -10,8 +10,8 @@ public:
     SHA_Hasher();
     explicit SHA_Hasher(int rounds);
     ~SHA_Hasher();
-    std::string hash(const std::string& in);
-    std::string hashN(std::string in);
+    std::string hash(const std::string &in);
+    std::string hashN(const std::string &in);
 };
 
 
