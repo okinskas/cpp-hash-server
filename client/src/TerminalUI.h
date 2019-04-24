@@ -8,12 +8,12 @@
 
 class TerminalUI {
 public:
-    TerminalUI();
+    explicit TerminalUI(HashClient &hashClient);
     ~TerminalUI()= default;
     void run();
 
 private:
-    std::unique_ptr<HashClient> mClient;
+    HashClient &mHashClient;
 };
 
 

@@ -29,7 +29,7 @@ std::string HashClient::hashMessage(const std::string &msg) {
     memset(buffer, 0, mBufferSize);
 
     send(sock, msg.c_str(), msg.size(), 0);
-    recv(sock , buffer, mBufferSize, 0);
+    recv(sock, buffer, mBufferSize, 0);
 
     return buffer;
 }

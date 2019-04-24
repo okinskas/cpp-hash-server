@@ -4,10 +4,7 @@
 #include "TerminalUI.h"
 #include "HashClient.h"
 
-TerminalUI::TerminalUI() {
-
-    mClient = std::make_unique<HashClient>();
-}
+TerminalUI::TerminalUI(HashClient &hashClient) : mHashClient(hashClient) {}
 
 void TerminalUI::run() {
 
@@ -21,7 +18,7 @@ void TerminalUI::run() {
         std::getline(std::cin, input);
         if (input == "\\q") break;
 
-        hashed = mClient->hashMessage(input);
+        hashed = mHashClient.hashMessage(input);
         std::cout << hashed << std::endl;
     }
 }
