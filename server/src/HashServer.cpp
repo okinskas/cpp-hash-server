@@ -15,19 +15,15 @@
 #include "SocketReader.h"
 #include "external/ShaHasher.h"
 
-void HashServer::handleSocketConnection(int connection, Hasher &hasher) {
+void HashServer::handleSocketConnection(int connection, Hasher &hasher, SocketReader &socketReader) {
 
-    auto socketReader = std::make_unique<SocketReader>();
-    std::string msg = socketReader->readFromSocket(connection);
+    std::string msg = socketReader.readFromSocket(connection);
     std::string hashed = hasher.hashN(msg);
     write(connection, hashed.c_str(), hashed.length());
 }
 
-HashServer::HashServer(int port, const int concurrentConnections, Hasher &hasher)
-        : mConcurrentConnections(concurrentConnections), mHasher(hasher) {
-
-    mSocket = std::make_unique<Socket>(port);
-}
+HashServer::HashServer(const int concurrentConnections, Hasher &hasher, Socket &socket, SocketReader &socketReader)
+        : mConcurrentConnections(concurrentConnections), mHasher(hasher), mSocket(socket), mSocketReader(socketReader) {}
 
 HashServer::~HashServer() {
 
@@ -44,8 +40,8 @@ void HashServer::initialiseConnections() {
 
     int connection;
     for (int i = 0; i < mConcurrentConnections; i++) {
-        connection = mSocket->wait();
-        std::thread th(handleSocketConnection, connection, std::ref(mHasher));
+        connection = mSocket.wait();
+        std::thread th(handleSocketConnection, connection, std::ref(mHasher), std::ref(mSocketReader));
         connections.push_back(std::move(th));
     }
 }
@@ -63,8 +59,8 @@ void HashServer::monitorConnections() {
         if (iter != connections.end()) {
             iter->join();
             connections.erase(iter);
-            int connection = mSocket->wait();
-            std::thread th(handleSocketConnection, connection, std::ref(mHasher));
+            int connection = mSocket.wait();
+            std::thread th(handleSocketConnection, connection, std::ref(mHasher), std::ref(mSocketReader));
             connections.push_back(std::move(th));
         }
     }

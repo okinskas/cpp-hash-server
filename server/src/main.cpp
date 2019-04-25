@@ -5,6 +5,10 @@
 
 int main() {
 
-    auto hasher = std::make_unique<ShaHasher>();
-    std::make_unique<HashServer>(8080, 20, *hasher)->run();
+    std::make_unique<HashServer>(
+            20,
+            *std::make_unique<ShaHasher>(),
+            *std::make_unique<Socket>(8080),
+            *std::make_unique<SocketReader>()
+    )->run();
 }

@@ -9,22 +9,24 @@
 
 #include "Socket.h"
 #include "gateway/Hasher.h"
+#include "SocketReader.h"
 
 class HashServer {
 
 public:
-    HashServer(int port, int concurrentConnections, Hasher &hasher);
+    HashServer(int concurrentConnections, Hasher &hasher, Socket &socket, SocketReader &socketReader);
     ~HashServer();
     void run();
 
 private:
     const int mConcurrentConnections;
     std::vector<std::thread> connections;
-    std::unique_ptr<Socket> mSocket;
     Hasher &mHasher;
+    Socket &mSocket;
+    SocketReader &mSocketReader;
     void initialiseConnections();
     void monitorConnections();
-    static void handleSocketConnection(int connection, Hasher &hasher);
+    static void handleSocketConnection(int connection, Hasher &hasher, SocketReader &socketReader);
 };
 
 
