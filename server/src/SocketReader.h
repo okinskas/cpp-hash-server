@@ -11,8 +11,6 @@ public:
     ~SocketReader();
 
     std::string readFromSocket(int connection);
-private:
-    static std::string getMessageFromBuffer(char* buffer);
 };
 
 

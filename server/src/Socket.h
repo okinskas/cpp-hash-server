@@ -5,11 +5,14 @@
 #include <string>
 
 class Socket {
-    int socketfd;
+
 public:
     explicit Socket(int port);
     ~Socket();
     int wait();
+
+private:
+    int socketfd;
 };
 
 

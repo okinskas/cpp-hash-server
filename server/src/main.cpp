@@ -1,8 +1,10 @@
 #include <memory>
 
 #include "HashServer.h"
+#include "external/ShaHasher.h"
 
 int main() {
 
-    std::make_unique<HashServer>(8080, 20)->run();
+    auto hasher = std::make_unique<ShaHasher>();
+    std::make_unique<HashServer>(8080, 20, *hasher)->run();
 }

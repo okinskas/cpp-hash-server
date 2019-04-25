@@ -1,4 +1,4 @@
-#include "SHA_Hasher.h"
+#include "ShaHasher.h"
 
 #include <utility>
 #include <openssl/sha.h>
@@ -8,28 +8,26 @@
 #define ROUNDS 10000
 
 
-SHA_Hasher::SHA_Hasher() {
+ShaHasher::ShaHasher() {
 
-    rounds = ROUNDS;
+    mRounds = ROUNDS;
 }
 
-SHA_Hasher::SHA_Hasher(int rounds) {
+ShaHasher::ShaHasher(int rounds) {
 
-    this->rounds = rounds;
+    mRounds = rounds;
 }
 
-SHA_Hasher::~SHA_Hasher() = default;
-
-std::string SHA_Hasher::hashN(const std::string &in) {
+std::string ShaHasher::hashN(const std::string &in) {
 
     std::string out = in;
-    for (int i = 0; i < rounds; i++) {
+    for (int i = 0; i < mRounds; i++) {
         out = hash(out);
     }
     return out;
 }
 
-std::string SHA_Hasher::hash(const std::string &str) {
+std::string ShaHasher::hash(const std::string &str) {
 
     // Implementation found here: https://stackoverflow.com/questions/2262386/generate-sha256-with-openssl-and-c
     unsigned char hash[SHA256_DIGEST_LENGTH];

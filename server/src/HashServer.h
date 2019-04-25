@@ -8,21 +8,23 @@
 #include <vector>
 
 #include "Socket.h"
+#include "gateway/Hasher.h"
 
 class HashServer {
-    const int mConcurrentConnections;
-    std::vector<std::thread> connections;
-    std::unique_ptr<Socket> mSocket;
+
 public:
-    HashServer();
-    HashServer(int port, int concurrentConnections);
+    HashServer(int port, int concurrentConnections, Hasher &hasher);
     ~HashServer();
     void run();
 
 private:
+    const int mConcurrentConnections;
+    std::vector<std::thread> connections;
+    std::unique_ptr<Socket> mSocket;
+    Hasher &mHasher;
     void initialiseConnections();
     void monitorConnections();
-    static void handleSocketConnection(int connection);
+    static void handleSocketConnection(int connection, Hasher &hasher);
 };
 
 
