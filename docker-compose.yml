@@ -1,7 +1,12 @@
 version: "3.1"
 services:
+
   server:
-    build: ./server
+    build:
+      context: ./server
+      args:
+        CONCURRENT: ${CONCURRENT}
+        PORT: ${PORT}
     command: "./server"
     ports:
       - "8080:8080"
